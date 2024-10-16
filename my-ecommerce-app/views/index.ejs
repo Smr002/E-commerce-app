@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTemplate - Home, Products, and Details</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="/img/svg+xml" sizes="200x200" href="/img/logo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/css/glide.theme.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <a href="https:/wa.me/+355693225557"  target="_blank" class="whatsapp_float"><i class="fa-brands fa-whatsapp whatsapp-icon"></i></a>
+    <div id="splash-screen">
+        <img id="logo" src="/img/logo.png" alt="Logo">
+    </div>
+
+    <header>
+        <!-- Top bar with contact info and icons (UP ABOVE the line and logo) -->
+        <div class="top-bar">
+            <div class="contact-info">
+                <span><i class="fas fa-phone-alt"></i> +355 * ** ****</span>
+                <span><i class="fas fa-envelope"></i> info@******.com</span>
+            </div>
+            <div class="right-icons">
+                <a href="#"><i class="fas fa-heart"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+            </div>
+        </div>
+
+ 
+        <nav class="main-nav">
+   
+            <div class="logo-line">
+                <div class="logo">
+                    <img src="/img/logo.png" alt="Template Logo">
+                    <span class="since">since 2024</span>
+                </div>
+            </div>
+
+            <div class="menu-container">
+                <ul class="left-menu">
+                    <li><a href="#">Femra</a></li>
+                    <li><a href="#">Meshkuj</a></li>
+                    <li><a href="#">Për Çiftet</a></li>
+                    <li><a href="#">Të gjitha Produktet</a></li>
+                </ul>
+        
+                <ul class="right-menu">
+                    <li><a href="#">Dhurata</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Rreth Nesh</a></li>
+                    <li><a href="#">Kontakto</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="background-about"></div>
+        <div class="banner">
+            <h1>AL-MCMXII</h1>
+            <label>Template /</label>
+            <a>Home</a>
+        </div>
+    </section>
+    <section style="background-color: white;">
+        <section class="top-section">
+            <div class="promo-banner" data-aos="fade-right" data-aos-delay="100">
+                <video id="myVideo" class="responsive-video" autoplay muted loop playsinline>
+                    <source src="/img/video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="promo-details">
+                    <h2>4TH OF JULY SAVINGS ARE HERE!</h2>
+                    <p>SAVE 15% SITEWIDE FOR ORDERS OVER $200</p>
+                    <p>CODE: JULY4</p>
+                    <p>Valid 7/3-7/6</p>
+                    <a href="#" class="shop-now">Shop Now</a>
+                </div>
+            </div>
+            <div class="promo-ad" data-aos="fade-left" data-aos-delay="200">
+                <img src="/img/product1.jpg" alt="Albania 1912 Time has passed Hoodie">
+                <p style="font-style: italic;">Albania 1912 "Time has passed" Hoodie</p> 
+                <p>Festoni trashëgiminë e pasur dhe frymën e mbizotëruar të Shqipërisë me "Time has passed" Hoodie nga marka Albania 1912...</p>
+                <a href="../product1.html" class="shop-now">Shop Now</a>
+            </div>
+            <div class="promo-ad" data-aos="fade-left" data-aos-delay="300">
+                <img src="/img/product2.jpg" alt="AL VIBES">
+                <p style="font-style: italic;">Albania 1912 "AL VIBES" Hoodie</p>
+                <p>Me një dizajn të guximshëm dhe simbolik, "AL VIBES" Hoodie përmbledh thelbin e identitetit shqiptar...</p>
+                <a href="../product2.html" class="shop-now">Shop Now</a>
+            </div>
+        </section>
+
+        <section>
+            <div class="black-line"></div>
+            <h2 style="text-align:center;">Products</h2>
+            <div class="black-line"></div>
+        </section>
+
+
+        <!-- Conditional Rendering: Products Section -->
+        <section>
+            
+            <% let counter = 0; %> <!-- Initialize counter outside the loop -->
+          
+            <section class="product-categories">
+                <% if (typeof products !== 'undefined' && products.length > 0) { %>
+        
+                    <!-- Loop through the first 8 products -->
+                    <% for (let i = 0; i < products.length && i < 7; i++) { %>
+                        <% const product = products[i]; %> <!-- Access current product -->
+                        <% counter++; %> 
+        
+                        <!-- Conditional check for counter (counter === 4 or counter === 8) -->
+                        <% if(counter === 4 || counter === 8) { %> 
+                            <div class="category" data-aos="fade-left" data-aos-delay="450">
+                                <div class="hover-overlay">
+                                    <div class="icons">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                        </svg>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                    </div>
+                                    <div class="add-to-cart" style=" color: #a81b1b;">
+                                        <a href="../template/add-to-cart.php">SHTO NË SHPORTË</a>
+                                    </div>
+                                </div>
+                                <img src="/img/aboutImg.png" alt="Product Image">
+                                <h2><%= product.name %></h2> <!-- Correctly render product name -->
+                                <p class="price"><%= product.price %> €</p> <!-- Correctly render product price -->
+                            </div>
+                        <% } %>
+        
+                        <!-- Standard product display -->
+                        <div class="category" data-aos="fade-right" data-aos-delay="150">
+                            <div class="card">
+                                <div class="card-side front">
+                                    <img src="/img/aboutImg.png" alt="Alpiner Extreme Quartz">
+                                    <h2><%= product.name %></h2>
+                                    <p class="price"><%= product.price %> €</p>
+                                </div>
+                                <div class="card-side back">
+                                    <div class="icons">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                        </svg>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                        <img src="/img/product3.jpg" alt="Alpiner Extreme Quartz" style="padding-top: 25%;">
+                                    </div>
+                                    <div class="add-to-cart" style=" color: #a81b1b;">
+                                        <a href="/products/<%= product._id %>">SHTO NË SHPORTË</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %> <!-- End for loop -->
+        
+                <% } else { %>
+                    <p>No products found.</p>
+                <% } %> <!-- End of product check -->
+            </section>
+        </section>
+
+
+        <br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<!-- Carousel part -->
+<section class="carousel-section" data-aos="fade-up" data-aos-delay="200">
+    <div class="black-line"></div>
+    <h2>New Products</h2>
+    <div class="black-line"></div>
+
+    <% if (typeof products !== 'undefined' && products.length > 0) { %>   
+        <div class="glide">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    <% products.forEach(product => { %> 
+                    <li class="glide__slide">
+                        <div class="product-box">
+                            <img src="/img/aboutImg.png" alt="Product 1">
+                            <p><%= product.name %></p> <!-- Correct EJS tag for output -->
+                            <p><%= product.description %></p> <!-- Correct EJS tag for output -->
+                        </div>
+                    </li>
+                    <% }) %> <!-- Close the forEach loop -->
+                </ul>
+            </div>
+
+            <div class="glide__arrows" data-glide-el="controls">
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+            </div>
+
+            <div class="glide__bullets" data-glide-el="controls[nav]">
+                <button class="glide__bullet" data-glide-dir="=0"></button>
+                <button class="glide__bullet" data-glide-dir="=1"></button>
+                <button class="glide__bullet" data-glide-dir="=2"></button>
+                <button class="glide__bullet" data-glide-dir="=3"></button>
+            </div>
+        </div>
+    <% } else { %>
+        <p>No new products available.</p> <!-- Message when no products are available -->
+    <% } %>
+
+</section>
+
+
+        
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section logo">
+                <img src="/img/logo.png" alt="Logo" style="max-width: 150px;">
+            </div>
+            <div class="footer-section contact">
+                <h3>Contact</h3>
+                <p>Tirana, 1001, Albania</p>
+                <p>+355 * ** ****</p>
+                <p>info@SMR-AL.com</p>
+            </div>
+            <div class="footer-section sources">
+                <h3>Sources</h3>
+                <ul>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>SMR-AL © 2024.</p>
+        </div>
+    </footer>
+    <script src="/js/js.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/glide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Sales Statistics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+         /* General page styling */
+         body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            background-color: #1d253b;
+            width: 250px;
+            height: 100vh;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 40px;
+        }
+
+        .sidebar a {
+            color: #a4aecb;
+            text-decoration: none;
+            font-size: 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar a:hover {
+            color: #fff;
+        }
+
+        .sidebar a.active {
+            color: #b29fff;
+        }
+
+        .sidebar .profile-section {
+            margin-top: auto;
+            color: #fff;
+        }
+
+        .sidebar .profile-section img {
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* Main content styling */
+        .main-content {
+            margin-left: 250px; /* Make space for the sidebar */
+            padding: 20px;
+            width: calc(100% - 250px);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        canvas {
+            max-width: 100%;
+            margin: 20px 0;
+        }
+        .logo {
+            width: 100px;  /* Adjust width as needed */
+            margin-bottom: 20px;  /* Space between logo and links */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        form {
+            margin: 0;
+            padding: 0;
+        }
+        
+        button {
+            display: flex;
+            align-items: center;
+            background-color: #4e73df;  /* Primary button color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button svg {
+            margin-right: 8px; /* Space between icon and text */
+            fill: currentColor; /* Inherit color from button */
+        }
+        
+        button:hover {
+            background-color: #3756d3; /* Darker shade on hover */
+        }
+        
+        button:focus {
+            outline: none; /* Remove default focus outline */
+        }
+        
+        button:active {
+            background-color: #2e4bb1; /* Even darker on active */
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="/img/logo.png" alt="Dashboard Logo" class="logo" />
+        <a href="/" class="active">Dashboard</a>
+        <a href="/products/add">Add Products</a>
+        <a href="/show_product">Show Products</a>
+        <a href="/users">Users</a>
+        <a href="/settings">Settings</a>
+        <form action="/logOut/logout" method="post">
+            <button type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                </svg>
+                Log Out
+            </button>
+        </form>
+        
+    </div>
+    
+    <div class="profile-section">
+        <img src="https://via.placeholder.com/40" alt="User Avatar">
+        <span>John Carter</span>
+    </div>
+</div>
+
+<!-- Main Content Area -->
+<div class="main-content">
+    <div class="container">
+        <h1>Sales Statistics Dashboard</h1>
+        <canvas id="salesChart"></canvas>  <!-- Bar chart for sales -->
+        <canvas id="revenueChart"></canvas> <!-- Line chart for revenue trends -->
+    </div>
+</div>
+
+<script>
+    // Static data for sales
+    const salesData = [
+        { label: "Product A", value: 120 },
+        { label: "Product B", value: 150 },
+        { label: "Product C", value: 80 },
+        { label: "Product D", value: 100 },
+        { label: "Product E", value: 90 }
+    ];
+
+    // Static data for revenue over time
+    const revenueData = [
+        { date: "2023-09-01", revenue: 1200 },
+        { date: "2023-09-02", revenue: 1450 },
+        { date: "2023-09-03", revenue: 980 },
+        { date: "2023-09-04", revenue: 1600 },
+        { date: "2023-09-05", revenue: 1700 }
+    ];
+
+    // Sales Chart (Bar Chart)
+    const salesLabels = salesData.map(item => item.label);
+    const salesValues = salesData.map(item => item.value);
+
+    const ctxSales = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctxSales, {
+        type: 'bar',
+        data: {
+            labels: salesLabels,
+            datasets: [{
+                label: 'Top Selling Products',
+                data: salesValues,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Sales Quantity'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Products'
+                    }
+                }
+            }
+        }
+    });
+
+    // Revenue Chart (Line Chart)
+    const revenueLabels = revenueData.map(item => item.date);
+    const revenueValues = revenueData.map(item => item.revenue);
+
+    const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctxRevenue, {
+        type: 'line',
+        data: {
+            labels: revenueLabels,
+            datasets: [{
+                label: 'Revenue Over Time',
+                data: revenueValues,
+                fill: false,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                tension: 0.2  // Add some curve to the line
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Revenue ($)'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
