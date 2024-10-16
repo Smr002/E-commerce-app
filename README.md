@@ -1,4 +1,4 @@
-E-commerce-app
+#E-commerce-app
 This is an e-commerce project that integrates with the WordPress API to handle data for products, orders, and customers. The project is built with the following technologies:
 
 Backend: Node.js and Express.js framework to create a REST API that communicates with WordPress.
