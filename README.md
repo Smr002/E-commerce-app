@@ -6,4 +6,4 @@ Frontend: HTML5 and CSS3 for building responsive and user-friendly interfaces.
 The app will allow users to browse products, add items to the cart, and complete purchases seamlessly. It will also feature admin capabilities for managing products and orders through the WordPress interface.
 
 The project is currently under development, and more features will be added soon. Below is an early design snapshot of the project.
-<img src="/img/visual1.png" alt="Template Logo">
+<img src="uploads/img/visual1.png" alt="Template Logo">
